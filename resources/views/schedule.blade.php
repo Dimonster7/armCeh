@@ -3,174 +3,159 @@
 @section('title', 'Расписание работы ресурсов')
 
 @section('content')
-
-        <div class="main">
-            <div class="wrap_table">
-              <form class="" action="" method="get">
-
-                <div class="filter">
-                    <div class="title_items">
-                        <p class="title_filter">Имя заказа</p>
-                        <p class="title_filter">Шифр ДСЕ</p>
-                        <p class="title_filter">Шифр</p>
-                        <p class="title_filter">Количество ДСЕ в партии</p>
-                        <p class="title_filter">Наименование станка</p>
-                        <p class="title_filter">Вид спецификации</p>
-                        <p class="title_filter">Номер операции</p>
-                        <p class="title_filter">Начало операции</p>
-                        <p class="title_filter">Окончание операции</p>
-                    </div>
-                    <div class="schedule_items">
-                        <div class="schedule_item1">
-                            <div class="name_schedule">
-                                <input type="text" placeholder="Ведите имя" name="order_name">
-                            </div>
-                        </div>
-
-                        <div class="schedule_item2">
-                            <div class="code_schedule">
-                                <div class="code_order">
-                                    <input type="text" placeholder="Ведите шифр ДСЕ" name="cipher_dse">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="schedule_item3">
-                            <div class="code_schedule">
-                                <div class="code_order">
-                                    <input type="text" placeholder="Ведите шифр" name="cipher">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="schedule_item4">
-                            <div class="code_schedule2">
-                                <input type="text" placeholder="Введите значение" name="count_dse1">
-                            </div>
-                            <div class="sort_code">
-                                <select name="count_dse2" id="">
-                                    <option value="DESC">По убыванию</option>
-                                    <option value="ASC">По возрастанию</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="schedule_item5">
-                            <div class="count_schedule">
-                                <input type="text" placeholder="Введите наименование" name="name_of_machine">
-                            </div>
-                        </div>
-
-                        <div class="schedule_item6">
-                            <div class="spec_schedule">
-                                 <select name="type_of_specification" id=""> <!--спецификации  -->
-                                    <option value="">Выбрать</option>
-                                    <option value="Головная">Головная</option>
-                                    <option value="Заимствованная">Заимствованная</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="schedule_item7">
-                            <div class="type_spec_schedule">
-                                <input type="text" placeholder="Введите номер" name="operation_number1">
-                            </div>
-                            <div class="sort_order_comp">
-                                <select name="operation_number2" id="">
-                                    <option value="DESC">По убыванию</option>
-                                    <option value="ASC">По возрастанию</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="schedule_item8">
-                            <div class="start_op">
-                                <input type="text" placeholder="__.__.__" name="operation_start_dateTime1">
-                            </div>
-                            <div class="sort_order_comp">
-                                <select name="operation_start_dateTime2" id="">
-                                    <option value="DESC">По убыванию</option>
-                                    <option value="ASC">По возрастанию</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="schedule_item9">
-                            <div class="end_op">
-                                <input type="text" placeholder="__.__.__" name="operation_end_dateTime1">
-                            </div>
-                            <div class="sort_order_comp">
-                                <select name="operation_end_dateTime2" id="">
-                                    <option value="DESC">По убыванию</option>
-                                    <option value="ASC">По возрастанию</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="btn_schedule_group">
-                    <div class="btn_filters_group">
-                        <button class="show_filter" type="submit" name="show">Показать</button>
-                        <button class="reset_filter" type="submit" name="reset">Сбросить</button>
-                    </div>
-                </div>
+<div class="content">
+      <div class="container-fluid">
+          <table class="table table-bordered">
+              <thead>
+                <form class="" action="" method="get">
+                @csrf
+                  <tr>
+                      <th rowspan="1" class="align-middle">Имя заказа</th>
+                      <th colspan="1" class="align-middle">Шифр ДСЕ</th>
+                      <th rowspan="1" class="align-middle">Шифр</th>
+                      <th rowspan="1" class="align-middle">Количество ДСЕ в партии</th>
+                      <th rowspan="1" class="align-middle">Наименование станка</th>
+                      <th rowspan="1" class="align-middle">Вид спецификации</th>
+                      <th rowspan="1" class="align-middle">Номер операции</th>
+                      <th rowspan="1" class="align-middle">Начало операции</th>
+                      <th rowspan="1" class="align-middle">Окончание операции</th>
+                  </tr>
+                  <tr>
+                      <th rowspan="1" class="align-middle">
+                          <input type="" class="form-control" id="floatingPassword" placeholder="Введите имя" name="order_name">
+                      </th>
+                      <th colspan="1" class="align-middle">
+                          <input type="" class="form-control" id="floatingPassword" placeholder="Введите шифр ДСЕ" name="cipher_dse">
+                      </th>
+                      <th rowspan="1" class="align-middle">
+                          <input type="" class="form-control" id="floatingPassword" placeholder="Введите шифр" name="cipher">
+                      </th>
+                      <th rowspan="1" class="align-middle">
+                          <div class="form-floating item_filters">
+                              <input type="" class="form-control" id="floatingPassword"
+                                  placeholder="Введите значение" name="count_dse1">
+                              <div class="btn-group btn_group_fil">
+                                  <button type="submit" class="btn btn-outline-secondary btn_acc_gr" name="count_dse2" value="ASC">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                          fill="currentColor" class="bi bi-sort-up" viewBox="0 0 16 16">
+                                          <path
+                                              d="M3.5 12.5a.5.5 0 0 1-1 0V3.707L1.354 4.854a.5.5 0 1 1-.708-.708l2-1.999.007-.007a.498.498 0 0 1 .7.006l2 2a.5.5 0 1 1-.707.708L3.5 3.707V12.5zm3.5-9a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zM7.5 6a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zm0 3a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1h-3zm0 3a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1z" />
+                                      </svg>
+                                  </button>
+                                  <button type="submit" class="btn btn-outline-secondary btn_del_r" name="count_dse2" value="DESC">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                          fill="currentColor" class="bi bi-sort-down" viewBox="0 0 16 16">
+                                          <path
+                                              d="M3.5 2.5a.5.5 0 0 0-1 0v8.793l-1.146-1.147a.5.5 0 0 0-.708.708l2 1.999.007.007a.497.497 0 0 0 .7-.006l2-2a.5.5 0 0 0-.707-.708L3.5 11.293V2.5zm3.5 1a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zM7.5 6a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zm0 3a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1h-3zm0 3a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1z" />
+                                      </svg>
+                                  </button>
+                              </div>
+                          </div>
+                      </th>
+                      <th rowspan="1" class="align-middle">
+                          <input type="" class="form-control" id="floatingPassword" placeholder="Наименование" name="name_of_machine">
+                      </th>
+                      <th rowspan="1" class="align-middle">
+                          <select class="form-select" aria-label="Default select example" name="type_of_specification">
+                              <option selected disabled>Спецификации</option>
+                              <option value="Головная">Головная</option>
+                              <option value="Заимствованная">Заимствованная</option>
+                          </select>
+                      </th>
+                      <th rowspan="1" class="align-middle">
+                          <div class="form-floating item_filters">
+                              <input type="" class="form-control" id="floatingPassword" placeholder="Введите номер" name="operation_number1">
+                              <div class="btn-group btn_group_fil">
+                                  <button type="submit" class="btn btn-outline-secondary btn_acc_gr" name="operation_number2" value="ASC">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                          fill="currentColor" class="bi bi-sort-up" viewBox="0 0 16 16">
+                                          <path
+                                              d="M3.5 12.5a.5.5 0 0 1-1 0V3.707L1.354 4.854a.5.5 0 1 1-.708-.708l2-1.999.007-.007a.498.498 0 0 1 .7.006l2 2a.5.5 0 1 1-.707.708L3.5 3.707V12.5zm3.5-9a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zM7.5 6a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zm0 3a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1h-3zm0 3a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1z" />
+                                      </svg>
+                                  </button>
+                                  <button type="submit" class="btn btn-outline-secondary btn_del_r" name="operation_number2" value="DESC">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                          fill="currentColor" class="bi bi-sort-down" viewBox="0 0 16 16">
+                                          <path
+                                              d="M3.5 2.5a.5.5 0 0 0-1 0v8.793l-1.146-1.147a.5.5 0 0 0-.708.708l2 1.999.007.007a.497.497 0 0 0 .7-.006l2-2a.5.5 0 0 0-.707-.708L3.5 11.293V2.5zm3.5 1a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zM7.5 6a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zm0 3a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1h-3zm0 3a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1z" />
+                                      </svg>
+                                  </button>
+                              </div>
+                          </div>
+                      </th>
+                      <th rowspan="1" class="align-middle">
+                          <div class="form-floating item_filters">
+                              <input type="" class="form-control" id="floatingPassword" placeholder="__.__.__" name="operation_start_dateTime1">
+                              <div class="btn-group btn_group_fil">
+                                  <button type="submit" class="btn btn-outline-secondary btn_acc_gr" name="operation_start_dateTime2" value="ASC">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                          fill="currentColor" class="bi bi-sort-up" viewBox="0 0 16 16">
+                                          <path
+                                              d="M3.5 12.5a.5.5 0 0 1-1 0V3.707L1.354 4.854a.5.5 0 1 1-.708-.708l2-1.999.007-.007a.498.498 0 0 1 .7.006l2 2a.5.5 0 1 1-.707.708L3.5 3.707V12.5zm3.5-9a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zM7.5 6a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zm0 3a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1h-3zm0 3a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1z" />
+                                      </svg>
+                                  </button>
+                                  <button type="submit" class="btn btn-outline-secondary btn_del_r" name="operation_start_dateTime2" value="DESC">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                          fill="currentColor" class="bi bi-sort-down" viewBox="0 0 16 16">
+                                          <path
+                                              d="M3.5 2.5a.5.5 0 0 0-1 0v8.793l-1.146-1.147a.5.5 0 0 0-.708.708l2 1.999.007.007a.497.497 0 0 0 .7-.006l2-2a.5.5 0 0 0-.707-.708L3.5 11.293V2.5zm3.5 1a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zM7.5 6a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zm0 3a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1h-3zm0 3a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1z" />
+                                      </svg>
+                                  </button>
+                              </div>
+                          </div>
+                      </th>
+                      <th rowspan="1" class="align-middle">
+                          <div class="form-floating item_filters">
+                              <input type="" class="form-control" id="floatingPassword" placeholder="__.__.__" name="operation_end_dateTime1">
+                              <div class="btn-group btn_group_fil">
+                                  <button type="submit" class="btn btn-outline-secondary btn_acc_gr" name="operation_end_dateTime2" value="ASC">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                          fill="currentColor" class="bi bi-sort-up" viewBox="0 0 16 16">
+                                          <path
+                                              d="M3.5 12.5a.5.5 0 0 1-1 0V3.707L1.354 4.854a.5.5 0 1 1-.708-.708l2-1.999.007-.007a.498.498 0 0 1 .7.006l2 2a.5.5 0 1 1-.707.708L3.5 3.707V12.5zm3.5-9a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zM7.5 6a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zm0 3a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1h-3zm0 3a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1z" />
+                                      </svg>
+                                  </button>
+                                  <button type="submit" class="btn btn-outline-secondary btn_del_r" name="operation_end_dateTime2" value="DESC">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                          fill="currentColor" class="bi bi-sort-down" viewBox="0 0 16 16">
+                                          <path
+                                              d="M3.5 2.5a.5.5 0 0 0-1 0v8.793l-1.146-1.147a.5.5 0 0 0-.708.708l2 1.999.007.007a.497.497 0 0 0 .7-.006l2-2a.5.5 0 0 0-.707-.708L3.5 11.293V2.5zm3.5 1a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zM7.5 6a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zm0 3a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1h-3zm0 3a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1z" />
+                                      </svg>
+                                  </button>
+                              </div>
+                          </div>
+                      </th>
+                  </tr>
+                  <tr>
+                      <th colspan="9" class="align-middle">
+                          <div class="btn_group_sch">
+                              <button type="submit" class="btn btn-primary" name="show">Показать</button>
+                              <button type="submit" class="btn btn-danger" name="reset">Сбросить</button>
+                              <a href="{{ route('export', $session_id) }}" class="download_excel">
+                                <button type="button" class="btn btn-success">Выгрузить в Excel</button>
+                              </a>
+                          </div>
+                      </th>
+                  </tr>
                 </form>
-                <div class="btn_in_exls">
-                    <a href="{{ route('export', $session_id) }}"><button class="up_exls">Выгрузить в Excel</button></a>
-                </div>
-
-
-
-                <div class="table_schedule">
-                    <table class="table">
-                        <tr>
-                            <th rowspan="1" class="first name_order len">Имя заказа</th>
-                            <th colspan="1" class="code_dse len">Шифр ДСЕ</th>
-                            <th rowspan="1" class="code len">Шифр</th>
-                            <th rowspan="1" class="count_dse len">Количество ДСЕ в партии</th>
-                            <th rowspan="1" class="name_st len">Наименование станка</th>
-                            <th rowspan="1" class="spec len">Вид спецификации</th>
-                            <th rowspan="1" class="spec len">Номер операции</th>
-                            <th rowspan="1" class="start_sc len">Начало операции</th>
-                            <th rowspan="1" class="end_sc len">Окончание операции</th>
-                        </tr>
-                        @foreach($data as $elem)
-                        <tr>
-                            <td class="first">{{$elem->order_name}}</td>
-                            <td class="first">{{$elem->cipher_dse}}</td>
-                            <td class="first">{{$elem->cipher}}</td>
-                            <td class="first">{{$elem->count_dse}}</td>
-                            <td class="first">{{$elem->name_of_machine}}</td>
-                            <td class="first">{{$elem->type_of_specification}}</td>
-                            <td class="first">{{$elem->operation_number}}</td>
-                            <td class="first">{{$elem->operation_start_dateTime}}</td>
-                            <td class="first">{{$elem->operation_end_dateTime}}</td>
-                        </tr>
-                        @endforeach
-                        <!-- <tr>
-                            <td class="first plan1">Тип плана</td>
-                            <td class="first plan2">Начало плана</td>
-                            <td class="first plan3">Окончание плана</td>
-                        </tr>
-                        <tr>
-                            <td rowspan="3" class="first">1</td>
-                            <td class="first">Год</td>
-                            <td class="first">25.06.2020</td>
-                            <td class="first">25.06.21</td>
-                            <td class="first">Без учета персонала</td>
-                            <td class="first">640</td>
-                            <td class="first">100%</td>
-                            <td class="first">
-                                <div class="btn_act">
-                                    <button class="accept">Принять</button>
-                                    <button class="delete">Удалить</button>
-                                </div>
-                            </td>
-                        </tr> -->
-                    </table>
-                </div>
-            </div>
-        </div>
-
+              </thead>
+              <tbody>
+                @foreach($data as $elem)
+                  <tr>
+                      <td class="align-middle">{{$elem->order_name}}</td>
+                      <td class="align-middle">{{$elem->cipher_dse}}</td>
+                      <td class="align-middle">{{$elem->cipher}}</td>
+                      <td class="align-middle">{{$elem->count_dse}}</td>
+                      <td class="align-middle">{{$elem->name_of_machine}}</td>
+                      <td class="align-middle">{{$elem->type_of_specification}}</td>
+                      <td class="align-middle">{{$elem->operation_number}}</td>
+                      <td class="align-middle">{{$elem->operation_start_dateTime}}</td>
+                      <td class="align-middle">{{$elem->operation_end_dateTime}}</td>
+                  </tr>
+                @endforeach
+              </tbody>
+          </table>
+          {{ $data->links() }}
+      </div>
+  </div>
 @endsection

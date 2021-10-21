@@ -1,13 +1,13 @@
-<div class="header">
-    <div class="wrap">
-        <div class="nav">
+<nav class="navbar navbar-light bg-light bg_shodow">
+        <div class="container">
+            <!-- <a class="navbar-brand">Navbar</a> -->
             <div class="logo">
-                <a class="logo_link" href="{{ route('sessions') }}"><img src="/img/armdl_logo.png" alt="armdl_logo"></a>
+                <a class="logo_link" href="{{ route('sessions') }}"><img class="img_head" src="/img/armdl_logo.png" alt="armdl_logo"></a>
             </div>
-            <div class="btn_group">
-                <!-- <a class="reg" href="#">Регистрация</a>
-            <a class="log" href="#">Вход</a> -->
-                <ul class="navbar-nav">
+            <form class="d-flex">
+                <!-- <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button> -->
+                <ul class="navbar_nav">
                     <li class="nav-item">
                         <a class="nav-link text-dark" target="_blank" href="{{ route('user.registration') }}">Регистрация</a>
                     </li>
@@ -15,7 +15,6 @@
                         <a class="nav-link text-dark" href="{{ route('user.login') }}">Вход</a>
                     </li>
                 </ul>
-            </div>
+            </form>
         </div>
-    </div>
-</div>
+    </nav>

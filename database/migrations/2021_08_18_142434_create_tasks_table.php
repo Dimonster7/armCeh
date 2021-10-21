@@ -15,6 +15,10 @@ class CreateTasksTable extends Migration
     {
         Schema::create('tasks', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->bigInteger('session_id')->unsigned();
+            $table->foreign('session_id')->on('sessions')->onDelete('cascade');//при удалении сессии, удаляются все её задачи
+            // $table->bigInteger('session_id')->unsigned()->nullable();
+            // $table->foreign('session_id')->on('sessions')->onDelete('set null');//при удалении сессии, session_id будет null
             $table->string('department');
             $table->integer('client_id_routelist');
             $table->integer('route_list');
@@ -32,6 +36,7 @@ class CreateTasksTable extends Migration
             $table->dateTime('start_dateTime');
             $table->dateTime('end_dateTime');
             $table->string('status');
+            $table->string('comment')->nullable();
             $table->timestamps();
         });
     }

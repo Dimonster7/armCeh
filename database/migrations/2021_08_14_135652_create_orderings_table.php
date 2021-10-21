@@ -14,8 +14,10 @@ class CreateOrderingTable extends Migration
      */
     public function up()
     {
-        Schema::create('ordering', function (Blueprint $table) {
+        Schema::create('orderings', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->bigInteger('session_id')->unsigned();
+            $table->foreign('session_id')->on('sessions')->onDelete('cascade');//при удалении сессии, удаляются все её задачи
             $table->integer('order_number');
             $table->string('order_name');
             $table->string('cipher_dse');

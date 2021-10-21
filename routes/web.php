@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Auth;
 // });
 //Route::get('/', 'CehController@index')->name('index');
 
-Route::name('user.')->group(function(){
+  Route::name('user.')->group(function(){
   Route::view('/private', 'private')->middleware('auth')->name('private');
 
   Route::get('/login', function(){
@@ -44,37 +44,42 @@ Route::name('user.')->group(function(){
 
 });
 
-Route::get('/sessions', 'CehController@sessions')->name('sessions');
-Route::get('/sessions/{session}/delete', 'CehController@deleteSession')->name('deleteSession');//для удалить
+Route::prefix('sessions')->group(function(){
+  Route::get('', 'CehController@sessions')->name('sessions');
+  Route::post('{session}/delete', 'CehController@deleteSession')->name('deleteSession');
+  Route::get('{session}', 'CehController@session')->name('session');
+  Route::get('{session}/export', 'CehController@export')->name('export');
 
-Route::get('/sessions/{session}', 'CehController@session')->name('session');
+  Route::prefix('{session}/applications')->group(function(){
+    Route::post('', 'CehController@app')->name('applications');
 
-//Route::get('/applications', 'CehController@applications')->name('applications');
-Route::view('/applications', 'app')->name('applications');
+    Route::prefix('planner')->group(function(){
+      Route::get('inProduction', 'CehController@inProduction')->name('inProduction');
+      Route::post('inProduction/{batch}/finish', 'CehController@finish')->name('finishProduction');
+      Route::post('suspended/{batch}/finish', 'CehController@finish')->name('finishSuspended');
+      Route::post('inProduction/{batch}/pause', 'CehController@pause')->name('pause');
+      Route::get('toLaunch', 'CehController@toLaunch')->name('toLaunch');
+      Route::post('toLaunch/{batch}/start', 'CehController@start')->name('startToLaunch');
+      Route::get('suspended', 'CehController@suspended')->name('suspended');
+      Route::post('suspended/{batch}/start', 'CehController@start')->name('startSuspended');
+      Route::get('completed', 'CehController@plannerCompleted')->name('plannerCompleted');
+    });
 
-// Route::get('/applications/planner', 'CehController@planner')->name('planner');
-// //Route::('/applications/planner', 'CehController@...')->name('planner');//для завершить
-// //Route::('/applications/planner', 'CehController@...')->name('planner');//для приостановить
+    Route::prefix('master')->group(function(){
+      Route::get('perform', 'CehController@perform')->name('perform');
+      Route::get('completed', 'CehController@masterCompleted')->name('masterCompleted');
+      Route::post('perform/{task}/finishTask', 'CehController@finishTask')->name('finishTaskMaster');
+      Route::post('perform/{task}/comment', 'CehController@comment')->name('commentMaster');
+      Route::post('perform/{task}/suspendwork', 'CehController@changeProgressAndStatus')->name('suspendworkMaster');
+      Route::post('perform/{id}/resumework', 'CehController@resumework')->name('resumeworkMaster');
+    });
 
-Route::get('/applications/planner/inProduction', 'CehController@inProduction')->name('inProduction');
-Route::post('/applications/planner/inProduction/{batch}/finish', 'CehController@finish')->name('finish');//для завершить
-Route::post('/applications/planner/inProduction/{batch}/pause', 'CehController@pause')->name('pause');//для приостановить
-
-
-Route::get('/applications/planner/toLaunch', 'CehController@toLaunch')->name('toLaunch');
-Route::post('/applications/planner/toLaunch/{batch}/startToLaunch', 'CehController@startToLaunch')->name('startToLaunch');//для запустить
-
-Route::get('/applications/planner/suspended', 'CehController@suspended')->name('suspended');
-Route::post('/applications/planner/suspended/{batch}/startSuspended', 'CehController@startSuspended')->name('startSuspended');//для запустить
-
-Route::get('/applications/planner/completed', 'CehController@plannerCompleted')->name('plannerCompleted');
-
-// Route::get('/applications/master', 'CehController@master')->name('master');
-
-Route::get('/applications/master/perform', 'CehController@perform')->name('perform');
-
-Route::get('/applications/master/completed', 'CehController@masterCompleted')->name('masterCompleted');
-
-Route::get('/applications/worker', 'CehController@worker')->name('worker');
-
-Route::get('/sessions/{session}/export', 'CehController@export')->name('export');
+    Route::prefix('worker')->group(function(){
+      Route::get('', 'CehController@worker')->name('worker');
+      Route::post('{task}/finishTask', 'CehController@finishTask')->name('finishTaskWorker');
+      Route::post('{task}/comment', 'CehController@comment')->name('commentWorker');
+      Route::post('{task}/suspendwork', 'CehController@changeProgressAndStatus')->name('suspendworkWorker');
+      Route::post('{id}/resumework', 'CehController@resumework')->name('resumeworkWorker');
+    });
+  });
+});
