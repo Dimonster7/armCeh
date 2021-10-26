@@ -159,7 +159,7 @@ class CehController extends Controller
     }
 
     return view('index', [
-      'data' => $sessions->paginate(15)
+      'data' => $sessions->paginate(15)->appends(request()->query())
     ]);
   }
 
@@ -218,7 +218,7 @@ class CehController extends Controller
     }
 
       return view('schedule', [
-        'data' => $orders->paginate(15),
+        'data' => $orders->paginate(15)->appends(request()->query()),
         'session_id' => $session
       ]);
   }
@@ -234,7 +234,7 @@ class CehController extends Controller
     $batchs = $batchs->where('status', 'в производстве')->where('session_id', $session);
 
     return view('planlist', [
-      'data' => $batchs->paginate(15),
+      'data' => $batchs->paginate(15)->appends(request()->query()),
       'session_id' => $session
     ]);
   }
@@ -261,7 +261,7 @@ class CehController extends Controller
     $batchs = $batchs->where('status', 'на запуск')->where('session_id', $session);
 
     return view('planlist', [
-      'data' => $batchs->paginate(15),
+      'data' => $batchs->paginate(15)->appends(request()->query()),
       'session_id' => $session
     ]);
   }
@@ -292,7 +292,7 @@ class CehController extends Controller
     $batchs = $batchs->where('status', 'завершено')->where('session_id', $session);
 
     return view('planlist', [
-      'data' => $batchs->paginate(15),
+      'data' => $batchs->paginate(15)->appends(request()->query()),
       'session_id' => $session
     ]);
   }

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateBatchTable extends Migration
+class CreateBatchesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -16,7 +16,7 @@ class CreateBatchTable extends Migration
         Schema::create('batches', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('session_id')->unsigned();
-            $table->foreign('session_id')->on('sessions')->onDelete('cascade');//при удалении сессии, удаляются все её задачи
+            //$table->foreign('session_id')->references('id')->on('sessions')->onDelete('cascade');//при удалении сессии, удаляются все её задачи
             // $table->bigInteger('session_id')->unsigned()->nullable();
             // $table->foreign('session_id')->on('sessions')->onDelete('set null');//при удалении сессии, session_id будет null
             $table->string('batch');

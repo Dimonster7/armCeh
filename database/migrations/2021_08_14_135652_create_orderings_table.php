@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateOrderingTable extends Migration
+class CreateOrderingsTable extends Migration
 {
     //protected $connection = 'pgsql';
     /**
@@ -17,7 +17,7 @@ class CreateOrderingTable extends Migration
         Schema::create('orderings', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('session_id')->unsigned();
-            $table->foreign('session_id')->on('sessions')->onDelete('cascade');//при удалении сессии, удаляются все её задачи
+            //$table->foreign('session_id')->references('id')->on('sessions')->onDelete('cascade');//при удалении сессии, удаляются все её задачи
             $table->integer('order_number');
             $table->string('order_name');
             $table->string('cipher_dse');

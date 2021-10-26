@@ -23,7 +23,7 @@
                 </thead>
                 <tbody>
                   <form class="" action="" method="get">
-                    @csrf
+                    
                     <tr>
                         <td>
                             <div class="form-floating item_filters">
