@@ -38,7 +38,8 @@ class DatabaseSeeder extends Seeder
       $professions=['Головная', 'Заимствованная'];
       $b=array_rand(['Головная', 'Заимствованная']);
       Ordering::insert([
-        'session_id'=>rand(1,5),
+        //'session_id'=>rand(1,5),
+        'session_id'=>1,
         'order_number'=>rand(3,15),
         'order_name'=>str_random(1).rand(1,99).'-'.rand(1,10),
         'cipher_dse'=>str_random(1).rand(1,9).'-'.rand(1,99).'.'.rand(1,10),
@@ -54,7 +55,8 @@ class DatabaseSeeder extends Seeder
       $status = ['в производстве', 'на запуск', 'приостановлено', 'завершено'];
       $e = array_rand(['в производстве', 'на запуск', 'приостановлено', 'завершено']);
       Batch::insert([
-        'session_id'=>rand(1,5),
+        //'session_id'=>rand(1,5),
+        'session_id'=>1,
         'batch'=>str_random(1).rand(1000,9999).'.'.rand(10,99).'.'.rand(10,99).'.'.rand(100,999),
         'route_list'=>rand(100,999),
         'cipher'=>rand(100,999),
@@ -78,7 +80,8 @@ class DatabaseSeeder extends Seeder
       $dep = ['сварочный','строительный','токарный','металлургический','слесарный','покрасочный','литейный'];
       $f = array_rand(['сварочный','строительный','токарный','металлургический','слесарный','покрасочный','литейный']);
       Task::insert([
-        'session_id'=>rand(1,5),
+        //'session_id'=>rand(1,5),
+        'session_id'=>1,
         'department' =>$dep[$f],
         'client_id_routelist'=>rand(100,999),
         'route_list'=>rand(100,999),
