@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\FilterRequest;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Input;
 
 use App\Exports\OrderingExport;
 use Maatwebsite\Excel\Facades\Excel;
@@ -118,6 +119,20 @@ class CehController extends Controller
   }*/
 
   public function sessions(FilterRequest $req){
+    //$req->flash();
+
+    // $req->session()->flush();
+    // dump($req->session());
+     // $i=Input::all();
+     // if($i){
+     //   dump('chto-to est`');
+     //   dump($i);
+     // } else {
+     //   dump('pusto');
+     //   dump($i);
+     // }
+    // dump(isset($i));
+    // dump($i);
     $sessions = new Session;
 
     if (($req->order_number1 != null)){
@@ -159,7 +174,8 @@ class CehController extends Controller
     }
 
     return view('index', [
-      'data' => $sessions->paginate(15)->appends(request()->query())
+      'data' => $sessions->paginate(15)->appends(request()->query()),
+      //'input' => Input::all()
     ]);
   }
 
@@ -430,5 +446,11 @@ class CehController extends Controller
       return redirect()->route('worker', $session);
     }
   }
+
+  // public function clear(FilterRequest $req){
+  //   $req->session()->flush();
+  //   //return $this->sessions($req);
+  //   return redirect(url()->previous());
+  // }
 
 }

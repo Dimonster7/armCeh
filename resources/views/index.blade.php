@@ -23,11 +23,11 @@
                 </thead>
                 <tbody>
                   <form class="" action="" method="get">
-                    
+
                     <tr>
                         <td>
                             <div class="form-floating item_filters">
-                                <input type="" class="form-control" id="floatingPassword" placeholder="Номер" name="order_number1">
+                                <input type="" class="form-control" id="floatingPassword" placeholder="Номер" name="order_number1" value=""><!--old('order_number1')-->
                                 <div class="btn-group btn_group_fil">
                                     <button type="submit" class="btn btn-outline-secondary btn_acc_gr" name="order_number2" value="ASC">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -141,6 +141,7 @@
                                 </div>
                             </div>
                         </td>
+
                         <td>
                             <div class="btn-group btn_group_fil">
                                 <button type="submit" class="btn btn-outline-secondary btn_acc_gr">
@@ -149,12 +150,16 @@
                                         <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
                                     </svg>
                                 </button>
-                                <button type="submit" class="btn btn-outline-secondary btn_del_r">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
-                                        <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/>
-                                        <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/>
-                                    </svg>
-                                </button>
+                                <!--</form>-->
+                              <!--  <form class="" action="/name" method="post">
+                                  @csrf -->
+                                  <button type="submit" class="btn btn-outline-secondary btn_del_r">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
+                                          <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/>
+                                          <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/>
+                                      </svg>
+                                  </button>
+                                <!--</form>-->
                             </div>
                         </td>
                     </tr>

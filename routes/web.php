@@ -15,6 +15,10 @@ use Illuminate\Support\Facades\Auth;
 // });
 //Route::get('/', 'CehController@index')->name('index');
 
+  Route::get('/', function(){
+    return redirect(route('sessions'));
+  });
+
   Route::name('user.')->group(function(){
   Route::view('/private', 'private')->middleware('auth')->name('private');
 
@@ -83,3 +87,4 @@ Route::prefix('sessions')->group(function(){
     });
   });
 });
+//Route::post('name', 'CehController@clear');
