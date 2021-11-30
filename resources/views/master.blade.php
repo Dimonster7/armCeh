@@ -171,6 +171,48 @@
                     </tr>
                     </form>
                 </thead>
+                <tfoot>
+                  <form action="{{ route('addTask', $session_id) }}" method="post">
+                    @csrf
+                  <tr class="table-footer Hide" id="addTask">
+                    <th>
+                      <input type="text" autocomplete="on" class="form-control" name="add_order_name" value="">
+                      <input type="text" autocomplete="on" id="depH" class="form-control Hide" name="department" value="">
+                    </th>
+                    <th>
+                      <input type="text" autocomplete="on" class="form-control" name="add_route_list" value="">
+                      <input type="text" autocomplete="on" class="form-control" name="add_client_id_routelist" value="">
+                    </th>
+                    <th>
+                      <input type="text" autocomplete="on" class="form-control" name="add_name_of_machine" value="">
+                    </th>
+                    <th>
+                      <input type="text" autocomplete="on" class="form-control" name="add_name_dse" value="">
+                    </th>
+                    <th>
+                      <input type="text" autocomplete="on" class="form-control" name="add_operation_number" value="">
+                    </th>
+                    <th>
+                      <input type="text" autocomplete="on" class="form-control" name="add_operation_name" value="">
+                    </th>
+                    <th>
+                      <input type="text" autocomplete="on" class="form-control" name="add_batch_count" value="">
+                    </th>
+                    <th>
+                      <input type="text" autocomplete="on" class="form-control" name="add_progress" value="">
+                    </th>
+                    <th>
+                      <input type="text" autocomplete="on" class="form-control" name="add_performer" value="">
+                    </th>
+                    <th>
+                      <input type="text" autocomplete="on" class="form-control" name="add_equipment" value="">
+                    </th>
+                    <th>
+                      <button  type="submit" class="btn btn-outline-secondary btn_acc_gr" name="button">Добавить</button>
+                    </th>
+                  </tr>
+                  </form>
+                </tfoot>
                 <tbody>
                   @foreach($data as $elem)
                   <tr class="Hide {{ $elem->department }} task workersTask {{$elem->status}}">
@@ -248,6 +290,7 @@ document.addEventListener('DOMContentLoaded', function() {
    currentlink= window.location.href;
 
    var workersTask = document.getElementsByClassName("workersTask");
+   console.log(workersTask.length);
    for (var i = 0; i < workersTask.length; i++) {
      if (workersTask[i].classList.contains('приостановлено')) {
        workersTask[i].classList.add('unactive')
@@ -359,6 +402,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function showTasks(){
 
+      var addTask = document.getElementById("addTask");
+      addTask.classList.remove("Hide");
+
       var chek = document.getElementsByClassName("task");
       for (var k = 0; k < chek.length; k++) {
         chek[k].classList.add('Hide')
@@ -374,8 +420,8 @@ document.addEventListener('DOMContentLoaded', function() {
           console.log(tasks[i].classList);
           tasks[i].classList.remove("Hide")
           }
-
       }
+      document.getElementById("depH").value = department.value;
     }
 
   // [{"order_name":"l38-10","route_list":"473","name_of_machine":"Токарно-винторезный","cipher_dse":"J3-34.6","operation_number":"22","operation_name":"термическая резка",

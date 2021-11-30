@@ -21,6 +21,37 @@
                         <th>Окончание плана</th>
                     </tr>
                 </thead>
+                <tfoot>
+                  <form action="{{ route('addSession') }}" method="post">
+                    @csrf
+                  <tr class="table-footer">
+                    <th>
+                      <input type="text" autocomplete="on" class="form-control" name="add_order_number" value="" required>
+                    </th>
+                    <th>
+                      <input type="text" autocomplete="on" class="form-control" name="add_type_of_plan" value="" required>
+                    </th>
+                    <th>
+                      <input type="text" autocomplete="on" class="form-control" name="add_start_of_plan" value="" required>
+                    </th>
+                    <th>
+                      <input type="text" autocomplete="on" class="form-control" name="add_end_of_plan" value="" required>
+                    </th>
+                    <th>
+                      <input type="text" autocomplete="on" class="form-control" name="add_information_on_professions" value="" required>
+                    </th>
+                    <th>
+                      <input type="text" autocomplete="on" class="form-control" name="add_duration_of_execution" value="" required>
+                    </th>
+                    <th>
+                      <input type="text" autocomplete="on" class="form-control" name="add_progress" value="" required>
+                    </th>
+                    <th>
+                      <button  type="submit" class="btn btn-outline-secondary btn_acc_gr" name="button">Добавить</button>
+                    </th>
+                  </tr>
+                  </form>
+                </tfoot>
                 <tbody>
                   <form class="" action="" method="get">
 

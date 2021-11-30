@@ -113,6 +113,58 @@
                         </div>
                     </div>
                 </div>
+
+
+                <div class="card card_item">
+                    <div class="card-body">
+                        <div class="col">
+                          <form class="" action="{{ route('addBatch', $session_id) }}" method="post">
+                            @csrf
+                            <div class="row row_filter">
+                                <div class="item">
+                                    <p class="title_master_i">Наименование партии</p>
+                                    <input class="filter_input form-control" type="text" placeholder="Введите наименование" name="add_batch">
+                                </div>
+
+                                <div class="item">
+                                    <p class="title_master_i">Маршрутный лист</p>
+                                    <input class="filter_input form-control" type="text" placeholder="Маршрутный лист" name="add_route_list">
+                                </div>
+
+                                <div class="item">
+                                    <p class="title_master_i">Шифр</p>
+                                    <input class="filter_input_s form-control" type="text" placeholder="Введите шифр" name="add_cipher">
+                                </div>
+
+                                <div class="item">
+                                    <p class="title_master_i">Размер партии</p>
+                                    <input class="filter_input form-control" type="text" placeholder="Введите значение" name="add_batch_count">
+                                </div>
+
+                                <div class="item">
+                                    <p class="title_master_i">Заказ</p>
+                                    <input class="filter_input form-control" type="text" placeholder="Введите наименование" name="add_order">
+                                </div>
+
+                                <div class="item">
+                                    <p class="title_master_i">Дата начала работ</p>
+                                    <input class="filter_input form-control" type="text" placeholder="__.__.__" name="add_start_dateTime">
+                                </div>
+
+                                <div class="item">
+                                    <p class="title_master_i">Дата окончания работ</p>
+                                    <input class="filter_input form-control" type="text" placeholder="__.__.__" name="add_end_dateTime">
+                                </div>
+                            </div>
+                            <div class="btn_group_sch up_fil">
+                              <button type="submit" class="btn btn-outline-secondary btn_acc_gr">Добавить</button>
+                            </div>
+                          </form>
+                        </div>
+                    </div>
+                </div>
+
+
                 @foreach($data as $elem)
                 <div class="card card_item">
                     <div class="card-body">

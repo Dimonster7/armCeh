@@ -139,6 +139,43 @@
                   </tr>
                 </form>
               </thead>
+              <tfoot>
+                <form action="{{ route('addOrder', $session_id) }}" method="post">
+                  @csrf
+                <tr class="table-footer">
+                  <th>
+                    <input type="text" autocomplete="on" class="form-control" name="add_order_name" value="">
+                  </th>
+                  <th>
+                    <input type="text" autocomplete="on" class="form-control" name="add_cipher_dse" value="">
+                  </th>
+                  <th>
+                    <input type="text" autocomplete="on" class="form-control" name="add_cipher" value="">
+                  </th>
+                  <th>
+                    <input type="text" autocomplete="on" class="form-control" name="add_count_dse" value="">
+                  </th>
+                  <th>
+                    <input type="text" autocomplete="on" class="form-control" name="add_name_of_machine" value="">
+                  </th>
+                  <th>
+                    <input type="text" autocomplete="on" class="form-control" name="add_type_of_specification" value="">
+                  </th>
+                  <th>
+                    <input type="text" autocomplete="on" class="form-control" name="add_operation_number" value="">
+                  </th>
+                  <th>
+                    <input type="text" autocomplete="on" class="form-control" name="add_operation_start_dateTime" value="">
+                  </th>
+                  <th>
+                    <input type="text" autocomplete="on" class="form-control" name="add_operation_end_dateTime" value="">
+                  </th>
+                  <th>
+                    <button  type="submit" class="btn btn-outline-secondary btn_acc_gr" name="button">Добавить</button>
+                  </th>
+                </tr>
+                </form>
+              </tfoot>
               <tbody>
                 @foreach($data as $elem)
                   <tr>

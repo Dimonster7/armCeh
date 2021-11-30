@@ -51,7 +51,9 @@ use Illuminate\Support\Facades\Auth;
 Route::prefix('sessions')->group(function(){
   Route::get('', 'CehController@sessions')->name('sessions');
   Route::post('{session}/delete', 'CehController@deleteSession')->name('deleteSession');
+  Route::post('add', 'CehController@addSession')->name('addSession');
   Route::get('{session}', 'CehController@session')->name('session');
+  Route::post('{session}/add', 'CehController@addOrder')->name('addOrder');
   Route::get('{session}/export', 'CehController@export')->name('export');
 
   Route::prefix('{session}/applications')->group(function(){
@@ -67,6 +69,7 @@ Route::prefix('sessions')->group(function(){
       Route::get('suspended', 'CehController@suspended')->name('suspended');
       Route::post('suspended/{batch}/start', 'CehController@start')->name('startSuspended');
       Route::get('completed', 'CehController@plannerCompleted')->name('plannerCompleted');
+      Route::post('inProduction/add', 'CehController@addBatch')->name('addBatch');
     });
 
     Route::prefix('master')->group(function(){
@@ -76,6 +79,7 @@ Route::prefix('sessions')->group(function(){
       Route::post('perform/{task}/comment', 'CehController@comment')->name('commentMaster');
       Route::post('perform/{task}/suspendwork', 'CehController@changeProgressAndStatus')->name('suspendworkMaster');
       Route::post('perform/{id}/resumework', 'CehController@resumework')->name('resumeworkMaster');
+      Route::post('perform/add', 'CehController@addTask')->name('addTask');
     });
 
     Route::prefix('worker')->group(function(){

@@ -370,13 +370,14 @@ class CehController extends Controller
     $tasks = $tasks->where('status', '!=', 'завершено')->where('session_id', $session)->orderBy('progress', 'DESC')->get();
 
     $progressTask = Task::select('progress')->where('session_id', $session)->get();
-    $sumProgress = 0;
-    foreach($progressTask as $progress){
-      $sumProgress += $progress->progress;
+    if($progressTask->count() != 0){
+      $sumProgress = 0;
+      foreach($progressTask as $progress){
+        $sumProgress += $progress->progress;
+      }
+      
+      Session::where('id', $session)->update(['progress' => round($sumProgress/$progressTask->count(), 1)]);
     }
-
-    Session::where('id', $session)->update(['progress' => round($sumProgress/$progressTask->count(), 1)]);
-
     return view('work', [
       'data' => $tasks,
       'session_id' => $session
@@ -384,10 +385,9 @@ class CehController extends Controller
   }
 
   public function export($session){
-    $collection = Ordering::select('order_name','cipher_dse','cipher','count_dse','name_of_machine','type_of_specification','operation_number','operation_start_dateTime','operation_end_dateTime')->where('session_id', $session)->get();
+    $collection = Ordering::select('cipher_dse','cipher','count_dse','name_of_machine','type_of_specification','operation_number','operation_start_dateTime','operation_end_dateTime')->where('session_id', $session)->get();
 
     $collection->prepend([
-      'Наименование заказа',
       'Шифр ДСЕ',
       'Шифр',
       'Кол-во ДСЕ в партии',
@@ -452,5 +452,77 @@ class CehController extends Controller
   //   //return $this->sessions($req);
   //   return redirect(url()->previous());
   // }
+
+  public function addSession(FilterRequest $req){
+    Session::insert([
+      'order_number' => $req->add_order_number,
+      'type_of_plan' => $req->add_type_of_plan,
+      'start_of_plan' => $req->add_start_of_plan,
+      'end_of_plan' => $req->add_end_of_plan,
+      'information_on_professions' => $req->add_information_on_professions,
+      'duration_of_execution' => $req->add_duration_of_execution,
+      'progress' => $req->add_progress
+    ]);
+
+      return redirect(url()->previous());
+  }
+
+  public function addOrder($session, FilterRequest $req){
+    Ordering::insert([
+      'session_id' => $session,
+      'order_name' => $req->add_order_name,
+      'cipher_dse' => $req->add_cipher_dse,
+      'cipher' => $req->add_cipher,
+      'count_dse' => $req->add_count_dse,
+      'name_of_machine' => $req->add_name_of_machine,
+      'type_of_specification' => $req->add_type_of_specification,
+      'operation_number' => $req->add_operation_number,
+      'operation_start_dateTime' => $req->add_operation_start_dateTime,
+      'operation_end_dateTime' => $req->add_operation_end_dateTime
+    ]);
+
+      return redirect(url()->previous());
+  }
+
+  public function addBatch($session, FilterRequest $req){
+    Batch::insert([
+      'session_id' => $session,
+      'batch' => $req->add_batch,
+      'route_list' => $req->add_route_list,
+      'cipher' => $req->add_cipher,
+      'batch_count' => $req->add_batch_count,
+      'order' => $req->add_order,
+      'start_dateTime' => $req->add_start_dateTime,
+      'end_dateTime' => $req->add_end_dateTime,
+      'status' => 'на запуск',
+    ]);
+
+      return redirect(url()->previous());
+  }
+
+  public function addTask($session, FilterRequest $req){
+    Task::insert([
+      'session_id' => $session,
+      'department' => $req->department,
+      'order_name' => $req->add_order_name,
+      'route_list' => $req->add_route_list,
+      'client_id_routelist' => $req->add_client_id_routelist,
+      'name_of_machine' => $req->add_name_of_machine,
+      'name_dse' => $req->add_name_dse,
+      'operation_number' => $req->add_operation_number,
+      'operation_name' => $req->add_operation_name,
+      'batch_count' => $req->add_batch_count,
+      'progress' => $req->add_progress,
+      'performer' => $req->add_performer,
+      'equipment' => $req->add_equipment,
+      'status' => 'в работе'
+      //cipher_dse
+      //cipher
+      //start_dateTime
+      //end_dateTime
+    ]);
+
+      return redirect(url()->previous());
+  }
 
 }
