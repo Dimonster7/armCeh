@@ -375,7 +375,7 @@ class CehController extends Controller
       foreach($progressTask as $progress){
         $sumProgress += $progress->progress;
       }
-      
+
       Session::where('id', $session)->update(['progress' => round($sumProgress/$progressTask->count(), 1)]);
     }
     return view('work', [
@@ -501,26 +501,48 @@ class CehController extends Controller
   }
 
   public function addTask($session, FilterRequest $req){
-    Task::insert([
-      'session_id' => $session,
-      'department' => $req->department,
-      'order_name' => $req->add_order_name,
-      'route_list' => $req->add_route_list,
-      'client_id_routelist' => $req->add_client_id_routelist,
-      'name_of_machine' => $req->add_name_of_machine,
-      'name_dse' => $req->add_name_dse,
-      'operation_number' => $req->add_operation_number,
-      'operation_name' => $req->add_operation_name,
-      'batch_count' => $req->add_batch_count,
-      'progress' => $req->add_progress,
-      'performer' => $req->add_performer,
-      'equipment' => $req->add_equipment,
-      'status' => 'в работе'
-      //cipher_dse
-      //cipher
-      //start_dateTime
-      //end_dateTime
-    ]);
+    $fields = Ordering::select('cipher_dse', 'cipher', 'operation_start_dateTime', 'operation_end_dateTime')->where('order_name', $req->add_order_name)->get();
+    if($fields->count() != 0){
+      foreach($fields as $field){
+        Task::insert([
+          'session_id' => $session,
+          'department' => $req->department,
+          'order_name' => $req->add_order_name,
+          'route_list' => $req->add_route_list,
+          'client_id_routelist' => $req->add_client_id_routelist,
+          'name_of_machine' => $req->add_name_of_machine,
+          'name_dse' => $req->add_name_dse,
+          'cipher_dse' => $field->cipher_dse,
+          'cipher' => $field->cipher,
+          'operation_number' => $req->add_operation_number,
+          'operation_name' => $req->add_operation_name,
+          'batch_count' => $req->add_batch_count,
+          'progress' => $req->add_progress,
+          'performer' => $req->add_performer,
+          'equipment' => $req->add_equipment,
+          'start_dateTime' => $field->operation_start_dateTime,
+          'end_dateTime' => $field->operation_end_dateTime,
+          'status' => 'в работе'
+        ]);
+      }
+    } else {
+      Task::insert([
+        'session_id' => $session,
+        'department' => $req->department,
+        'order_name' => $req->add_order_name,
+        'route_list' => $req->add_route_list,
+        'client_id_routelist' => $req->add_client_id_routelist,
+        'name_of_machine' => $req->add_name_of_machine,
+        'name_dse' => $req->add_name_dse,
+        'operation_number' => $req->add_operation_number,
+        'operation_name' => $req->add_operation_name,
+        'batch_count' => $req->add_batch_count,
+        'progress' => $req->add_progress,
+        'performer' => $req->add_performer,
+        'equipment' => $req->add_equipment,
+        'status' => 'в работе'
+      ]);
+    }
 
       return redirect(url()->previous());
   }

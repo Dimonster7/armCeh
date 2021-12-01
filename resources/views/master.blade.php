@@ -180,8 +180,8 @@
                       <input type="text" autocomplete="on" id="depH" class="form-control Hide" name="department" value="">
                     </th>
                     <th>
-                      <input type="text" autocomplete="on" class="form-control" name="add_route_list" value="">
-                      <input type="text" autocomplete="on" class="form-control" name="add_client_id_routelist" value="">
+                      <input type="text" autocomplete="on" placeholder="Маршрутный лист" class="form-control" name="add_route_list" value=""><br/>
+                      <input type="text" autocomplete="on" placeholder="Клиентский идентификатор" class="form-control" name="add_client_id_routelist" value="">
                     </th>
                     <th>
                       <input type="text" autocomplete="on" class="form-control" name="add_name_of_machine" value="">
@@ -202,10 +202,22 @@
                       <input type="text" autocomplete="on" class="form-control" name="add_progress" value="">
                     </th>
                     <th>
-                      <input type="text" autocomplete="on" class="form-control" name="add_performer" value="">
+                      <!--<input type="text" autocomplete="on" class="form-control" name="add_performer" value="">-->
+                      <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="add_performer">
+                        <option value=""></option>
+                          @foreach($performer as $per)
+                          <option value="{{ $per->FIO }}">{{ $per->FIO }}</option>
+                          @endforeach
+                      </select>
                     </th>
                     <th>
-                      <input type="text" autocomplete="on" class="form-control" name="add_equipment" value="">
+                      <!--<input type="text" autocomplete="on" class="form-control" name="add_equipment" value="">-->
+                      <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="add_equipment">
+                        <option value=""></option>
+                          @foreach($equipment as $e)
+                          <option value="{{ $e->name }}">{{ $e->name }}</option>
+                          @endforeach
+                      </select>
                     </th>
                     <th>
                       <button  type="submit" class="btn btn-outline-secondary btn_acc_gr" name="button">Добавить</button>
