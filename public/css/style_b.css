@@ -539,3 +539,8 @@ select {
 /* .modal-dialog {
     width: 1200px;
 } */
+.tableList {
+  width: 30%;
+  float: left;
+  margin-left: 3%;
+}

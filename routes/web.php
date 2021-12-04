@@ -45,21 +45,31 @@ use Illuminate\Support\Facades\Auth;
 
   Route::post('/registration', 'RegisterController@save');
 
-
 });
 
-Route::prefix('sessions')->group(function(){
-  Route::get('', 'CehController@sessions')->name('sessions');
-  Route::post('{session}/delete', 'CehController@deleteSession')->name('deleteSession');
-  Route::post('add', 'CehController@addSession')->name('addSession');
-  Route::get('{session}', 'CehController@session')->name('session');
-  Route::post('{session}/add', 'CehController@addOrder')->name('addOrder');
-  Route::get('{session}/export', 'CehController@export')->name('export');
+Route::prefix('addList')->middleware('isAdmin')->group(function(){
+  Route::get('', 'CehController@addList')->name('addList');
+  Route::post('addListDepartment', 'CehController@addListDep')->name('addListDep');
+  Route::post('addListPerformer', 'CehController@addListPer')->name('addListPer');
+  Route::post('addListEquipment', 'CehController@addListEq')->name('addListEq');
+});
+
+Route::prefix('sessions')->middleware('auth')->group(function(){
+  //Route::middleware('isAdmin')->group(function(){
+    Route::get('', 'CehController@sessions')->name('sessions');
+  Route::middleware('isAdmin')->group(function(){
+    Route::post('{session}/delete', 'CehController@deleteSession')->name('deleteSession');
+    Route::post('add', 'CehController@addSession')->name('addSession');
+    Route::get('{session}', 'CehController@session')->name('session');
+    Route::post('{session}/add', 'CehController@addOrder')->name('addOrder');
+    Route::get('{session}/export', 'CehController@export')->name('export');
+  });
+
 
   Route::prefix('{session}/applications')->group(function(){
-    Route::post('', 'CehController@app')->name('applications');
+    Route::get('', 'CehController@app')->name('applications');
 
-    Route::prefix('planner')->group(function(){
+    Route::prefix('planner')->middleware('isAdmin')->group(function(){
       Route::get('inProduction', 'CehController@inProduction')->name('inProduction');
       Route::post('inProduction/{batch}/finish', 'CehController@finish')->name('finishProduction');
       Route::post('suspended/{batch}/finish', 'CehController@finish')->name('finishSuspended');
@@ -72,7 +82,7 @@ Route::prefix('sessions')->group(function(){
       Route::post('inProduction/add', 'CehController@addBatch')->name('addBatch');
     });
 
-    Route::prefix('master')->group(function(){
+    Route::prefix('master')->middleware('isMaster')->group(function(){
       Route::get('perform', 'CehController@perform')->name('perform');
       Route::get('completed', 'CehController@masterCompleted')->name('masterCompleted');
       Route::post('perform/{task}/finishTask', 'CehController@finishTask')->name('finishTaskMaster');
@@ -82,7 +92,7 @@ Route::prefix('sessions')->group(function(){
       Route::post('perform/add', 'CehController@addTask')->name('addTask');
     });
 
-    Route::prefix('worker')->group(function(){
+    Route::prefix('worker')->middleware('auth')->group(function(){
       Route::get('', 'CehController@worker')->name('worker');
       Route::post('{task}/finishTask', 'CehController@finishTask')->name('finishTaskWorker');
       Route::post('{task}/comment', 'CehController@comment')->name('commentWorker');

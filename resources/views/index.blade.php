@@ -209,7 +209,7 @@
                         <td class="align-middle">
                             <div class="btn_act">
                                 <div class="btn-group btn_group_fil">
-                                  <form action="{{ route('applications', $elem->id) }}" method="post">
+                                  <form action="{{ route('applications', $elem->id) }}" method="get">
                                     @csrf
                                     <a href="{{ route('applications', $elem->id) }}">
                                       <button class="btn btn-outline-secondary btn_acc_gr">

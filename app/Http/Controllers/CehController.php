@@ -9,6 +9,8 @@ use App\Models\Task;
 use App\Models\Department;
 use App\Models\Performer;
 use App\Models\Equipment;
+use App\Models\Role;
+use App\Models\UserRole;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\FilterRequest;
@@ -186,6 +188,7 @@ class CehController extends Controller
   }
 
   public function session($session, FilterRequest $req){
+    //dd($req->user());
     $orders = new Ordering;
     // $order_number = new Session;
     // $order_number = $order_number->select('order_number')->where('id', $session)->get();
@@ -340,6 +343,8 @@ class CehController extends Controller
 
   public function masterCompleted($session, FilterRequest $req){
     $department = Department::all();
+    $performer = Performer::all();
+    $equipment = Equipment::all();
 
     $tasks = $this->tasksFilter($req);
     $tasks = $tasks->where('status', 'завершено')->where('session_id', $session);
@@ -347,6 +352,8 @@ class CehController extends Controller
     return view('master', [
       'data' => $tasks->get(),
       'dep' => $department,
+      'performer' => $performer,
+      'equipment' => $equipment,
       'session_id' => $session
     ]);
   }
@@ -365,9 +372,24 @@ class CehController extends Controller
     }
   }
 
-  public function worker($session){
+  public function worker($session, Request $req){
     $tasks = new Task;
-    $tasks = $tasks->where('status', '!=', 'завершено')->where('session_id', $session)->orderBy('progress', 'DESC')->get();
+    //dd($req->user());
+    //$tasks = $tasks->where('status', '!=', 'завершено')->where('session_id', $session)->orderBy('progress', 'DESC')->get();
+    $roleId = UserRole::select('role_id')->where('user_id', $req->user()->id)->get();
+    if($roleId->count() != 0){
+      $performer = $req->user()->last_name." ".$req->user()->first_name;
+      $role = Role::select('role')->where('id', $roleId[0]->role_id)->get();
+      if ($role[0]->role == "Рабочий"){
+       $tasks = $tasks->where('status', '!=', 'завершено')->where('performer', $performer)->orderBy('progress', 'DESC')->get();
+      } else {
+        $tasks = $tasks->where('status', '!=', 'завершено')->orderBy('progress', 'DESC')->get();
+      }
+    } else {
+      $tasks = $tasks->where('status', '!=', 'завершено')->orderBy('progress', 'DESC')->get();
+    }
+
+
 
     $progressTask = Task::select('progress')->where('session_id', $session)->get();
     if($progressTask->count() != 0){
@@ -545,6 +567,42 @@ class CehController extends Controller
     }
 
       return redirect(url()->previous());
+  }
+
+  public function addList(){
+    $department = Department::all();
+    $performer = Performer::all();
+    $equipment = Equipment::all();
+
+    return view('lists', [
+      'departments' => $department,
+      'performers' => $performer,
+      'equipment' => $equipment
+    ]);
+  }
+
+  public function addListDep(FilterRequest $req){
+    Department::insert([
+      'name_department' => $req->name_department
+    ]);
+
+    return redirect(url()->previous());
+  }
+
+  public function addListPer(FilterRequest $req){
+    Performer::insert([
+      'FIO' => $req->FIO
+    ]);
+
+    return redirect(url()->previous());
+  }
+
+  public function addListEq(FilterRequest $req){
+    Equipment::insert([
+      'name' => $req->name_eq
+    ]);
+
+    return redirect(url()->previous());
   }
 
 }
