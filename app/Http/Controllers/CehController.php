@@ -605,4 +605,19 @@ class CehController extends Controller
     return redirect(url()->previous());
   }
 
+  public function delList($id, FilterRequest $req){
+
+    if (str_ends_with(url()->current(), 'delDepartment')){
+      Department::where('id', $id)->delete();
+    }
+    if (str_ends_with(url()->current(), 'delPerformer')){
+      Performer::where('id', $id)->delete();
+    }
+    if (str_ends_with(url()->current(), 'delEquipment')){
+      Equipment::where('id', $id)->delete();
+    }
+
+    return redirect(url()->previous());
+  }
+
 }

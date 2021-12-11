@@ -9,7 +9,7 @@
                 <button class="btn btn-outline-success" type="submit">Search</button> -->
                 <ul class="navbar_nav">
                     <li class="nav-item">
-                        <a class="nav-link text-dark" href="{{ route('addList') }}">Добавить списки</a>
+                        <a class="nav-link text-dark" href="{{ route('addList') }}">Справочники</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-dark" target="_blank" href="{{ route('user.registration') }}">Регистрация</a>

@@ -47,11 +47,14 @@ use Illuminate\Support\Facades\Auth;
 
 });
 
-Route::prefix('addList')->middleware('isAdmin')->group(function(){
+Route::prefix('lists')->middleware('isAdmin')->group(function(){
   Route::get('', 'CehController@addList')->name('addList');
   Route::post('addListDepartment', 'CehController@addListDep')->name('addListDep');
   Route::post('addListPerformer', 'CehController@addListPer')->name('addListPer');
   Route::post('addListEquipment', 'CehController@addListEq')->name('addListEq');
+  Route::post('{id}/delDepartment', 'CehController@delList')->name('delDep');
+  Route::post('{id}/delPerformer', 'CehController@delList')->name('delPer');
+  Route::post('{id}/delEquipment', 'CehController@delList')->name('delEq');
 });
 
 Route::prefix('sessions')->middleware('auth')->group(function(){
