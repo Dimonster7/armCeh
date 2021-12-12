@@ -175,9 +175,15 @@ class CehController extends Controller
         $sessions = $sessions->orderBy('progress', $req->progress2);
     }
 
+    $roleId = UserRole::select('role_id')->where('user_id', $req->user()->id)->get();
+    if($roleId->count() != 0){
+      $role = Role::select('role')->where('id', $roleId[0]->role_id)->get();
+    }
+
     return view('index', [
       'data' => $sessions->paginate(15)->appends(request()->query()),
       //'input' => Input::all()
+      'role' => $role[0]->role
     ]);
   }
 

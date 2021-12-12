@@ -21,6 +21,7 @@
                         <th>Окончание плана</th>
                     </tr>
                 </thead>
+                @if($role == "Администратор")
                 <tfoot>
                   <form action="{{ route('addSession') }}" method="post">
                     @csrf
@@ -52,6 +53,7 @@
                   </tr>
                   </form>
                 </tfoot>
+                @endif
                 <tbody>
                   <form class="" action="" method="get">
 
