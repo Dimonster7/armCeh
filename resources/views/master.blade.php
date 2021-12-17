@@ -181,7 +181,7 @@
                     </th>
                     <th>
                       <input type="text" autocomplete="on" placeholder="Маршрутный лист" class="form-control" name="add_route_list" value=""><br/>
-                      <input type="text" autocomplete="on" placeholder="Клиентский идентификатор" class="form-control" name="add_client_id_routelist" value="">
+                      <input type="text" autocomplete="on" placeholder="Клиентский идентификатор" class="form-control" name="add_client_id_routelist" value="" title="Клиентский идентификатор маршрутного листа">
                     </th>
                     <th>
                       <input type="text" autocomplete="on" class="form-control" name="add_name_of_machine" value="">

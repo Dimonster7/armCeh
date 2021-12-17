@@ -9,7 +9,6 @@ use App\Models\Task;
 use App\Models\Department;
 use App\Models\Performer;
 use App\Models\Equipment;
-use App\Models\Role;
 use App\Models\UserRole;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -177,13 +176,15 @@ class CehController extends Controller
 
     $roleId = UserRole::select('role_id')->where('user_id', $req->user()->id)->get();
     if($roleId->count() != 0){
-      $role = Role::select('role')->where('id', $roleId[0]->role_id)->get();
+      $role = $roleId[0]->role_id;
+    } else {
+      $role = 0;
     }
 
     return view('index', [
       'data' => $sessions->paginate(15)->appends(request()->query()),
       //'input' => Input::all()
-      'role' => $role[0]->role
+      'role' => $role
     ]);
   }
 
@@ -385,8 +386,9 @@ class CehController extends Controller
     $roleId = UserRole::select('role_id')->where('user_id', $req->user()->id)->get();
     if($roleId->count() != 0){
       $performer = $req->user()->last_name." ".$req->user()->first_name;
-      $role = Role::select('role')->where('id', $roleId[0]->role_id)->get();
-      if ($role[0]->role == "Рабочий"){
+      //$role = Role::select('role')->where('id', $roleId[0]->role_id)->get();
+      //if ($role[0]->role == "Рабочий"){
+      if ($roleId[0]->role_id == 3){
        $tasks = $tasks->where('status', '!=', 'завершено')->where('performer', $performer)->orderBy('progress', 'DESC')->get();
       } else {
         $tasks = $tasks->where('status', '!=', 'завершено')->orderBy('progress', 'DESC')->get();
