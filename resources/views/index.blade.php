@@ -30,7 +30,13 @@
                       <input type="text" autocomplete="on" class="form-control" name="add_order_number" value="" required>
                     </th>
                     <th>
-                      <input type="text" autocomplete="on" class="form-control" name="add_type_of_plan" value="" required>
+                      <!--<input type="text" autocomplete="on" class="form-control" name="add_type_of_plan" value="" required>-->
+                      <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="add_type_of_plan">
+                          <option disabled selected>Тип плана</option>
+                          <option value="Год">Год</option>
+                          <option value="Квартал">Квартал</option>
+                          <option value="Месяц">Месяц</option>
+                      </select>
                     </th>
                     <th>
                       <input type="text" autocomplete="on" class="form-control" name="add_start_of_plan" value="" required>
